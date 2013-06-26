@@ -1,15 +1,13 @@
 <?php
 /*
 Plugin Name: CMD-S Save
-Description: Saves a pos by hijacking the cmd-s key combination
-Version: 0.1
+Description: A dirty way to save a post, page or <abbr title="Custom post type">cpt</abbr> by hijacking the <code>cmd-s</code> key combination in most good browsers.
+Version: 1.0
 Author: Paul Adam Davis
 Author URI: http://pauladamdvais.com
 */
 
-function load_cmds_js() {
-    $url = get_option('siteurl');
-    $url = bloginfo("wpurl") . '/wp-content/plugins/cmd-s/save.js';
-    echo '"<script type="text/javascript" src="'. $url . '"></script>"';
+function load_custom_wp_admin_style() {
+    wp_enqueue_script( 'cbm_smd_s', plugins_url('/save.js', __FILE__), array('jquery'), '1.0', true);
 }
-add_action('admin_footer', 'load_cmds_js');
+add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
